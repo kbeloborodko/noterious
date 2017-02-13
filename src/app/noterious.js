@@ -18,7 +18,7 @@ angular.module('noterious', [
       })
       .state('boards', {
         url:'/boards',
-        templateUrl: 'app/login/boards.tmpl.html',
+        templateUrl: 'app/boards/boards.tmpl.html',
         controller: 'BoardsCtrl',
         controllerAs: 'boards'
       })
