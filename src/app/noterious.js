@@ -6,7 +6,7 @@ angular.module('noterious', [
   'firebase',
   'noterious.common'
 ])
-  .constant('ENDPOINT_URI', 'https://noterious.firebaseio.com/')
+  .constant('ENDPOINT_URI', 'https://noterious-8cb11.firebaseapp.com/')
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
 
