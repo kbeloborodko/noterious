@@ -6,7 +6,6 @@ angular.module('noterious', [
   'firebase',
   'noterious.common'
 ])
-  .constant('ENDPOINT_URI', 'https://noterious-8cb11.firebaseapp.com/')
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
 
@@ -16,6 +15,12 @@ angular.module('noterious', [
         templateUrl: 'app/login/login.tmpl.html',
         controller: 'LoginCtrl',
         controllerAs: 'login'
+      })
+      .state('boards', {
+        url:'/boards',
+        templateUrl: 'app/login/boards.tmpl.html',
+        controller: 'BoardsCtrl',
+        controllerAs: 'boards'
       })
     ;
 

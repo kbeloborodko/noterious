@@ -3,7 +3,7 @@
 angular.module('noterious.common')
   .service('UserModel', function (Auth) {
     var service = this,
-      currentUser = null;
+        currentUser = null;
 
     service.getCurrentUser = function () {
       return currentUser;
@@ -14,10 +14,7 @@ angular.module('noterious.common')
     };
 
     service.login = function (user) {
-      return Auth.$authWithPassword({
-        email: user.email,
-        password: user.password
-      }, function(error, authData) {
+      return Auth.$signInWithEmailAndPassword(user.email, user.password, function(error, authData) {
         if (error) {
           currentUser = null;
           console.error('Authentication failed:', error);
@@ -29,10 +26,7 @@ angular.module('noterious.common')
     };
 
     service.register = function (user) {
-      return Auth.$createUser({
-        email: user.email,
-        password: user.password
-      }, function(error, authData) {
+      return Auth.$createUserWithEmailAndPassword(user.email, user.password, function(error, authData) {
         if(error){
           console.error('Error: ', error);
           return error;
@@ -45,7 +39,7 @@ angular.module('noterious.common')
 
     service.logout = function () {
       console.log('LOGOUT FIRED!');
-      Auth.$unauth();
+      Auth.$signOut();
       currentUser = null;
     };
   });
