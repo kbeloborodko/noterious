@@ -14,27 +14,35 @@ angular.module('noterious.common')
     };
 
     service.login = function (user) {
-      return Auth.$signInWithEmailAndPassword(user.email, user.password, function(error, authData) {
-        if (error) {
-          currentUser = null;
-          console.error('Authentication failed:', error);
-        } else {
-          currentUser = authData.uid;
-          console.log('Logged in as:', authData.uid);
-        }
-      });
+      return Auth.$signInWithEmailAndPassword(user.email, user.password)
+        .then(
+          function(authData) {
+            currentUser = authData.uid;
+            console.log('Logged in as:', authData.uid);
+          },
+          function(error) {
+            if (error) {
+              currentUser = null;
+              console.error('Authentication failed:', error);
+            }
+          }
+        );
     };
 
     service.register = function (user) {
-      return Auth.$createUserWithEmailAndPassword(user.email, user.password, function(error, authData) {
-        if(error){
-          console.error('Error: ', error);
-          return error;
-        } else {
-          console.log('User ' + authData.uid + ' created successfully!');
-          return service.login(user.email, user.password);
-        }
-      });
+      return Auth.$createUserWithEmailAndPassword(user.email, user.password)
+        .then(
+          function(authData) {
+            console.log('User ' + authData.uid + ' created successfully!');
+            return service.login(user.email, user.password);
+          },
+          function(error) {
+            if(error){
+              console.error('Error: ', error);
+              return error;
+            }
+          }
+        );
     };
 
     service.logout = function () {
