@@ -16,11 +16,11 @@ angular.module('noterious.common')
     service.login = function (user) {
       return Auth.$signInWithEmailAndPassword(user.email, user.password)
         .then(
-          function(authData) {
+          function (authData) {
             currentUser = authData.uid;
             console.log('Logged in as:', authData.uid);
           },
-          function(error) {
+          function (error) {
             if (error) {
               currentUser = null;
               console.error('Authentication failed:', error);
@@ -32,12 +32,11 @@ angular.module('noterious.common')
     service.register = function (user) {
       return Auth.$createUserWithEmailAndPassword(user.email, user.password)
         .then(
-          function(authData) {
+          function (authData) {
             console.log('User ' + authData.uid + ' created successfully!');
-            return service.login(user.email, user.password);
           },
-          function(error) {
-            if(error){
+          function (error) {
+            if (error) {
               console.error('Error: ', error);
               return error;
             }

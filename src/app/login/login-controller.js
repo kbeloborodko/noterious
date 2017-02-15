@@ -6,6 +6,8 @@ angular.module('noterious')
 
     login.loading = false;
 
+    login.isSuccessfullyRegistered = false;
+
     login.user = {
       email: '',
       password: '',
@@ -17,7 +19,7 @@ angular.module('noterious')
           email: login.user.email,
           password: login.user.password
       })
-      .then(onLogin)
+      .then(onRegisterSuccess)
       .catch(onError)
       .finally(onCompletion);
     }
@@ -27,13 +29,17 @@ angular.module('noterious')
           email: login.user.email,
           password: login.user.password
       })
-      .then(onSuccess)
+      .then(onLoginSuccess)
       .catch(onError)
       .finally(onCompletion);
     }
 
-    function onSuccess(result) {
+    function onLoginSuccess() {
       $state.go('boards');
+    }
+
+    function onRegisterSuccess() {
+      login.isSuccessfullyRegistered = true;
     }
 
     function onError(reason) {
@@ -44,15 +50,19 @@ angular.module('noterious')
       login.reset();
     }
 
-    login.submit = function (user, isValid, isRegistering) {
+    login.submit = function (user, isValid) {
       if (isValid) {
         login.loading = true;
 
-        if (isRegistering) {
-          register();
-        } else {
-          onLogin();
-        }
+        onLogin();
+      }
+    };
+
+    login.register = function (user, isValid) {
+      if (isValid) {
+        login.loading = true;
+
+        register();
       }
     };
 

@@ -25,12 +25,6 @@ angular.module('noterious')
       ctrl.boards = BoardsModel.all()
         .then(function (boards) {
           ctrl.boards = boards;
-        })
-        .catch(function () {
-
-        })
-        .finally(function () {
-
         });
     };
 

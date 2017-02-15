@@ -1,7 +1,7 @@
 <div class="col-sm-4">
     <div class="boards">
         <div
-                ng-repeat="(boardId, board) in ctrl.boards"
+                ng-repeat="board in ctrl.boards"
                 ng-click="ctrl.setEditedBoard(boardId, board)"
                 class="simple-board">
             <h3>{{board.title}}</h3>
