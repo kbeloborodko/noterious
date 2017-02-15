@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('noterious')
-  .controller('LoginCtrl', function (UserModel, $state) {
+  .controller('LoginCtrl', function (UserModel, $state, $q) {
     var login = this;
 
     login.loading = false;

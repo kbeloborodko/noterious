@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('noterious.common')
-  .service('UserModel', function (Auth) {
+  .service('UserModel', function (Auth, $q) {
     var service = this,
         currentUser = null;
 
@@ -24,6 +24,7 @@ angular.module('noterious.common')
             if (error) {
               currentUser = null;
               console.error('Authentication failed:', error);
+              return $q.reject(error);
             }
           }
         );
@@ -38,7 +39,7 @@ angular.module('noterious.common')
           function (error) {
             if (error) {
               console.error('Error: ', error);
-              return error;
+              return $q.reject(error);
             }
           }
         );
