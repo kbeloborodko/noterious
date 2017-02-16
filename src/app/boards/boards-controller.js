@@ -22,17 +22,17 @@ angular.module('noterious')
     };
 
     ctrl.getBoards = function () {
-      ctrl.boards = BoardsModel.all()
-        .then(function (boards) {
-          ctrl.boards = boards;
-        });
+      ctrl.boards = BoardsModel.all();
     };
 
     ctrl.createBoard = function (board, isValid) {
       if (isValid) {
         ctrl.loading = true;
 
-        ctrl.boards[3] = board;
+        BoardsModel.create(board)
+          .then(function (boardId) {
+            ctrl.boards[boardId] = board;
+        });
 
         ctrl.resetForm();
       }
@@ -41,6 +41,8 @@ angular.module('noterious')
     ctrl.updateBoard = function (boardId, board, isValid) {
       if (isValid) {
         ctrl.loading = true;
+
+        BoardsModel.update(boardId, board);
 
         ctrl.boards[boardId] = board;
 

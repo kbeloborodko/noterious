@@ -27,4 +27,12 @@ angular.module('noterious.common')
     service.create = function (board) {
       return $http.post(getUrl(), board).then(extract);
     };
+
+    service.update = function (boardId, board) {
+      return $http.put(getUrlForId(boardId), board).then(extract);
+    };
+
+    service.delete = function (boardId) {
+      return $http.delete(getUrlForId(boardId)).then(extract);
+    } ;
   });
