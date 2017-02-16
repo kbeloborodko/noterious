@@ -34,5 +34,5 @@ angular.module('noterious.common')
 
     service.delete = function (boardId) {
       return $http.delete(getUrlForId(boardId)).then(extract);
-    } ;
+    };
   });
