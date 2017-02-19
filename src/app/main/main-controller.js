@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('noterious')
-  .controller('MainCtrl', function (UserModel, Auth, $state) {
+  .controller('MainCtrl', function (UserModel, Auth, $state, $scope) {
     var main = this;
     main.auth = Auth;
     main.currentUser = null;
@@ -28,6 +28,8 @@ angular.module('noterious')
       if (authData) {
         UserModel.setCurrentUser(authData.uid);
         main.currentUser = authData.uid;
+
+        $scope.$emit('userIdSet');
       } else {
         main.currentUser = null;
       }

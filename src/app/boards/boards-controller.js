@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('noterious')
-  .controller('BoardsCtrl', function (currentUser, BoardsModel) {
+  .controller('BoardsCtrl', function (currentUser, BoardsModel, $rootScope) {
     var ctrl = this;
 
     ctrl.loading = false;
@@ -22,7 +22,17 @@ angular.module('noterious')
     };
 
     ctrl.getBoards = function () {
-      ctrl.boards = BoardsModel.all();
+      BoardsModel.all()
+        .then(function (result) {
+          if (result) {
+            ctrl.boards = result;
+          }
+          else {
+            ctrl.boards = {};
+          }
+        }, function () {
+          ctrl.resetForm();
+        });
     };
 
     ctrl.createBoard = function (board, isValid) {
@@ -73,5 +83,7 @@ angular.module('noterious')
       ctrl.isEditing = false;
     };
 
-    ctrl.getBoards();
+    $rootScope.$on('userIdSet', function () {
+      ctrl.getBoards();
+    });
   });

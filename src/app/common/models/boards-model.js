@@ -4,8 +4,8 @@ angular.module('noterious.common')
   .service('BoardsModel', function ($http, UserModel, ENDPOINT_URI) {
     var service = this;
 
-    function extract (response) {
-      return response.data;
+    function extract (result) {
+      return result.data;
     }
 
     function getUrl () {
@@ -32,7 +32,7 @@ angular.module('noterious.common')
       return $http.put(getUrlForId(boardId), board).then(extract);
     };
 
-    service.delete = function (boardId) {
+    service.destroy = function (boardId) {
       return $http.delete(getUrlForId(boardId)).then(extract);
     };
   });
